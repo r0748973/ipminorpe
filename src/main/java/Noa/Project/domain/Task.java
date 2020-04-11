@@ -24,7 +24,7 @@ public class Task {
     private String title, description;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime date;
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<SubTask> list = new ArrayList<>();
 
     public Long getId() {
@@ -53,6 +53,7 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
     public void addSubTask(SubTask subTask)
     {
         list.add(subTask);
