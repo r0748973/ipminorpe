@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<div th:include="header.html"></div>
+<h4>Tasks</h4>
+<div th:if="${notasks}">
+    <div>No tasks</div>
+</div>
+<div th:unless="${notasks}">
+
+
+<table>
+    <thead>
+
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td ><a th:href="@{'/tasks/' + ${task.id}}" th:text="*{task.duedate}"></a></td>
+
+    </tr>
+    </tbody>
+</table>
+</div>
+
+
+</body>
+</html>

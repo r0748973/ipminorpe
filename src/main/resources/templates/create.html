@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>create subtask</title>
+</head>
+<body>
+<div th:include="header.html"></div>
+<div th:if="${notexist}">
+    <div> Task not found</div>
+</div>
+<div th:unless="${notexist}">
+    <form th:action="@{'/tasks/subbed/' + ${subId}}">
+        <h4>create subtask </h4>
+        <div>
+            <label for="title">title: </label>
+            <input type="text" name="title" id="title">
+        </div>
+        <div>
+            <label for="description">description: </label>
+            <input type="text" name="description" id="description">
+        </div>
+        <input type="submit" value="add subtask">
+    </form>
+</div>
+</body>
+</html>

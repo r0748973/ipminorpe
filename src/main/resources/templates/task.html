@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+</head>
+<body>
+<div th:include="header.html"></div>
+<div th:if="${notask}">
+    <div> Task not found</div>
+</div>
+<div th:unless="${notask}">
+    <h4> Task detail</h4>
+
+    <table >
+        <thead>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Title: </td>
+            <td th:text="${title}" ></td>
+        </tr>
+        <tr>
+            <td>Description: </td>
+            <td th:text="${description}" ></td>
+        </tr>
+        <tr>
+            <td>Due date: </td>
+            <td th:text="${duedate}" ></td>
+        </tr>
+        <tr th:each="task : ${subtasks}">
+            <td>Subtask:</td>
+            <td th:text="*{task.title}"></td>
+            <td th:text="*{task.description}"> /td>
+        </tr>
+        <a th:href="@{'/tasks/' + ${taskid} + '/sub/create'}" >create subtask</a>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
