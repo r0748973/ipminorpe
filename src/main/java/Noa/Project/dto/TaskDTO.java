@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TaskDTO {
     @NotEmpty
-    @Size(min=3)
+
     private String title, description;
     private LocalDateTime date;
 //    private List<SubTask> list = new ArrayList<>();

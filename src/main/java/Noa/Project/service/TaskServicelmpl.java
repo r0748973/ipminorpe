@@ -35,17 +35,16 @@ public class TaskServicelmpl implements TaskService {
         result.setDate(task.getDate());
 
         repository.save(result);
-        repository.flush();
 
     }
 
     @Override
     public void editTask(Long id, TaskDTO task2) {
-
-        getTasks().get(id).setDate(task2.getDate());
-        getTasks().get(id).setDescription(task2.getDescription());
-        getTasks().get(id).setTitle(task2.getTitle());
-        repository.save(getTasks().get(id));
+        Task task1 = getTasks().get(id);
+        task1.setDescription(task2.getDescription());
+        task1.setTitle(task2.getTitle());
+        task1.setDate(task2.getDate());
+        repository.save(task1);
         repository.flush();
     }
 
@@ -54,12 +53,11 @@ public class TaskServicelmpl implements TaskService {
         SubTask result = new SubTask();
         result.setDescription(task.getDescription());
         result.setTitle(task.getTitle());
-        System.out.println(getTasks().get(id));
+
         Task task1 = getTasks().get(id);
         task1.addSubTask(result);
 
         repository.save(task1);
-        repository.flush();
 
 
     }
