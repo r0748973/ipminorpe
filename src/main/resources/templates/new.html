@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>new task</title>
 </head>
 <body>
 <div th:include="header.html"></div>
-<form method="post" action="/tasks">
+<form method="post" action="/" th:object="${taskdto}">
     <h4>Add task</h4>
+    <p th:text="${#fields.globalErrors()}"></p>
     <div>
         <label for="title">title: </label>
-        <input type="text" name="title" id="title">
+        <input type="text"  th:field="*{title}">
+        <p th:errors="*{title}"></p>
     </div>
     <div>
         <label for="description">description: </label>
-        <input type="text" name="description" id="description">
+        <input type="text" id="description" th:field="*{description}" >
     </div>
     <div>
         <label for="date">due-date: </label>
-        <input type="datetime-local" name="date" id="date" >
+        <input type="datetime-local" id="date" th:field="*{date}">
     </div>
 
     <input type="submit" value="Add task">

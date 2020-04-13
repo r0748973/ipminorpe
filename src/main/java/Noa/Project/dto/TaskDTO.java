@@ -3,6 +3,7 @@ package Noa.Project.dto;
 import Noa.Project.domain.SubTask;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class TaskDTO {
     @NotEmpty
-
+    @Size(min=2)
     private String title, description;
     private LocalDateTime date;
 //    private List<SubTask> list = new ArrayList<>();

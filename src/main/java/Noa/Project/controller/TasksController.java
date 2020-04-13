@@ -9,7 +9,10 @@ import Noa.Project.service.TaskServicelmpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/")
@@ -21,6 +24,11 @@ public class TasksController {
         this.taskService = taskService;
     }
 
+    @GetMapping
+    public String getindex()
+    {
+        return "index";
+    }
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
     public String getTasks(Model model){
         if (taskService.getTasks().size() == 0)
@@ -72,9 +80,10 @@ public class TasksController {
         return "edit";
     }
     //navigatie naar new
-    @RequestMapping(value = "/tasks/new", method = RequestMethod.GET)
-    public String getnew()
+    @GetMapping("/tasks/new")
+    public String getnew(Model model)
     {
+        model.addAttribute("taskdto", new TaskDTO());
         return "new";
     }
 
@@ -110,10 +119,16 @@ public class TasksController {
     }
 
 
-    @RequestMapping(value = "/tasks", method = RequestMethod.POST)
-    public String addTask(@ModelAttribute TaskDTO task)
+    @PostMapping
+    public String addTask(@ModelAttribute("taskdto") @Valid TaskDTO taskdto, BindingResult bindingResult)
     {
-        taskService.addTask(task);
-        return "redirect:/tasks";
+        if(bindingResult.hasErrors()){
+            return "new";
+        }else
+        {
+            taskService.addTask(taskdto);
+            return "redirect:/tasks";
+        }
+
     }
 }
